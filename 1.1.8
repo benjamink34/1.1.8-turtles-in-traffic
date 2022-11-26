@@ -1,0 +1,68 @@
+import turtle as trtl
+trtl.speed(10)
+wn = trtl.Screen()
+wn.screensize(canvwidth =.5, canvheight=.5)
+
+# creates empty lists of turtles
+horiz_turtles = []
+vert_turtles = []
+
+# uses shapes and colors
+turtle_shapes = ["arrow", "turtle", "circle", "square", "triangle", "classic"]
+horiz_colors = ["red", "blue", "green", "orange", "purple", "gold"]
+vert_colors = ["darkred", "darkblue", "lime", "salmon", "indigo", "brown"]
+tloc = 50 
+for s in turtle_shapes:
+
+  ht = trtl.Turtle(shape=s)
+  horiz_turtles.append(ht)
+  ht.penup()
+  new_color = horiz_colors.pop()
+  ht.fillcolor(new_color)
+  ht.goto(-350, tloc) 
+  ht.setheading(0) 
+
+  vt = trtl.Turtle(shape=s)
+  vert_turtles.append(vt)
+  vt.penup()
+  new_color = vert_colors.pop()
+  vt.fillcolor(new_color)
+  vt.goto( -tloc, 350) 
+  vt.setheading(270) 
+  
+  tloc += 50
+
+# TODO: move turtles across and down screen, stopping for collisions
+steps = 5
+for i in range(4):
+  for i in horiz_turtles:
+    i.forward(4)
+  for i in vert_turtles:
+    i.forward(4)
+    
+	
+  for h in horiz_turtles:
+    for v in vert_turtles:
+      xDistance = abs(h.xcor()-v.xcor())
+      yDistance = abs(h.ycor()-v.ycor())
+      if xDistance <20:
+        if yDistance < 20:
+          h.fillcolor("red")
+          h.shape("arrow")
+          h.right(180)
+          h.forward(15)
+          h.right(180)
+          v.fillcolor("red")
+          v.shape("arrow")
+          v.right(180)
+          v.forward(45)
+          v.right(180)
+          
+
+
+  steps = steps + 1
+
+
+
+wn = trtl.Screen()
+wn.mainloop()
